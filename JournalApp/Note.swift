@@ -15,5 +15,4 @@ struct Note {
     var isStarred: Bool
     var createdAt: Date
     var lastUpdatedAt: Date
-    
 }
