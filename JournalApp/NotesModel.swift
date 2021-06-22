@@ -17,13 +17,19 @@ class NotesModel {
     
     var delegate: NotesModelProtocol?
     
+    var listener: ListenerRegistration?
+    
+    deinit {
+        // Unregister database listener 
+    }
+    
     func getNotes() {
         
         // Get a reference to the database
         let db = Firestore.firestore()
         
         // Get all the notes
-        db.collection("notes").getDocuments { (snapshot, error) in
+        self.listener = db.collection("notes").addSnapshotListener { (snapshot, error) in
             
             // Check for errors
             if error == nil && snapshot != nil {
