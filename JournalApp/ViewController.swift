@@ -31,15 +31,20 @@ class ViewController: UIViewController {
         notesModel.getNotes()
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let noteViewController = segue.destination as! NoteViewController
         
         // if user selected a row, transition to note VC
         if tableView.indexPathForSelectedRow != nil {
             noteViewController.note = notes[tableView.indexPathForSelectedRow!.row]
-            noteViewController.notesModel = self.notesModel
             
+            // Deselect row to avoid interference with new note creation
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: false)
         }
+        
+        noteViewController.notesModel = self.notesModel
+        
     }
 
 
