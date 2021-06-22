@@ -69,7 +69,13 @@
                             <constraint firstItem="lqd-Ja-Kxi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lAB-jj-F8v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RcZ-A4-dTg"/>
+                    <navigationItem key="navigationItem" id="RcZ-A4-dTg">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="t2Z-53-HiS">
+                            <connections>
+                                <segue destination="0Tg-so-t9x" kind="presentation" id="V8q-Sn-Isa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lqd-Ja-Kxi" id="e8m-eh-Q8P"/>
                     </connections>
@@ -171,7 +177,11 @@
             <point key="canvasLocation" x="137.68115942028987" y="80.357142857142847"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="V8q-Sn-Isa"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
