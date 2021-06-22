@@ -11,6 +11,8 @@ class NoteViewController: UIViewController {
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var bodyTextView: UITextView!
+    @IBOutlet var starButton: UIButton!
+    
     
     var note: Note?
     var notesModel: NotesModel?
@@ -22,8 +24,6 @@ class NoteViewController: UIViewController {
             
             titleTextField.text = note?.title
             bodyTextView.text = note?.body
-            
-            
         }
         
     }
@@ -59,6 +59,9 @@ class NoteViewController: UIViewController {
       
     }
     
-    
+    @IBAction func startTapped(_ sender: Any) {
+        
+        
+    }
 
 }
