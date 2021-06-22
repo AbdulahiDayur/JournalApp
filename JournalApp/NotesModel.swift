@@ -20,7 +20,8 @@ class NotesModel {
     var listener: ListenerRegistration?
     
     deinit {
-        // Unregister database listener 
+        // Unregister database listener
+        listener?.remove()
     }
     
     func getNotes() {
