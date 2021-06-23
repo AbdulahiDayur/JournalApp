@@ -58,6 +58,15 @@ class NotesModel {
         
     }
     
+    func updateFaveStatus(_ docID: String, _ isStarred: Bool) {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("notes").document(docID).updateData(["isStarred": isStarred])
+        
+    }
+    
+    
     func deleteNote(_ n: Note) {
         let db = Firestore.firestore()
         

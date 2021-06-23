@@ -14,6 +14,9 @@ import Firebase
 class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var starButton: UIBarButtonItem!
+    
+    
     private var notesModel = NotesModel()
     private var notes = [Note]()
     
@@ -46,7 +49,11 @@ class ViewController: UIViewController {
         noteViewController.notesModel = self.notesModel
         
     }
-
+    
+    
+    @IBAction func starFilterTapped(_ sender: Any) {
+        
+    }
 
 }
 

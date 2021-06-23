@@ -22,11 +22,22 @@ class NoteViewController: UIViewController {
 
         if note != nil {
             
+            // User is viewing an existing note, so populate the fields
             titleTextField.text = note?.title
             bodyTextView.text = note?.body
+            
+            // Set the status of the star button
+            setStarButton()
+        } else {
+            
+            // Create brand new note
+           let n = Note(docID: UUID().uuidString, title: titleTextField.text ?? "", body: bodyTextView.text ?? "", isStarred: false, createdAt: Date(), lastUpdatedAt: Date())
+           
+           self.note = n
         }
         
     }
+    
     
     @IBAction func deleteTapped(_ sender: Any) {
         
@@ -36,21 +47,13 @@ class NoteViewController: UIViewController {
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+       
+        // This is an update to the existing note
+        self.note?.title = titleTextField.text ?? ""
+        self.note?.body = bodyTextView.text ?? ""
+        self.note?.lastUpdatedAt = Date()
         
-        if self.note == nil {
-             // Create brand new note
-            let n = Note(docID: UUID().uuidString, title: titleTextField.text ?? "", body: bodyTextView.text ?? "", isStarred: false, createdAt: Date(), lastUpdatedAt: Date())
-            
-            self.note = n
-            
     
-        } else {
-            // This is an update to the existing note
-            self.note?.title = titleTextField.text ?? ""
-            self.note?.body = bodyTextView.text ?? ""
-            self.note?.lastUpdatedAt = Date()
-            
-        }
         
         // Send it to the notes model
         self.notesModel?.saveNote(self.note!)
@@ -59,8 +62,26 @@ class NoteViewController: UIViewController {
       
     }
     
+    
+    func setStarButton() {
+        
+        if note!.isStarred {
+            starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+    }
+    
     @IBAction func startTapped(_ sender: Any) {
         
+        // Change property in the note
+        note?.isStarred.toggle()
+        
+        // Update the db
+        notesModel?.updateFaveStatus(note!.docID, note!.isStarred)
+        
+        // update the button
+        setStarButton()
         
     }
 
