@@ -14,6 +14,7 @@ import Firebase
 class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
+    private var isStarFiltered = false
     @IBOutlet var starButton: UIBarButtonItem!
     
     
@@ -30,8 +31,15 @@ class ViewController: UIViewController {
         // set self as the delegate for the notesModel
         notesModel.delegate = self
         
+        // Set the status of the star filter button
+        setStarFilterButton()
+        
         // Retrieve all notes
-        notesModel.getNotes()
+        if isStarFiltered {
+            notesModel.getNotes(true)
+        } else {
+            notesModel.getNotes()
+        }
     }
     
     
@@ -51,7 +59,21 @@ class ViewController: UIViewController {
     }
     
     
+    func setStarFilterButton() {
+        let imageName = isStarFiltered ? "star.fill" : "star"
+        starButton.image = UIImage(systemName: imageName)
+    }
+    
     @IBAction func starFilterTapped(_ sender: Any) {
+        
+        // Toggle the star filter status
+        isStarFiltered.toggle()
+        
+        // run query
+        isStarFiltered ? notesModel.getNotes(true) : notesModel.getNotes()
+        
+        // set star filter button
+        setStarFilterButton()
         
     }
 
